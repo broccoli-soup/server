@@ -24,7 +24,7 @@
 </head>
 <body>
     <h1>Shared Total</h1>
-    <p id = "Total">Loading...</p>
+    <p id = "total">Loading...</p>
     <input type = "number" id = "numberInput" placeholder = "enter a number..." step = "1"/>
     <button onclick = "sendNumber()">Add Number</button>
     <button onclick = "fetchTotal()">Update Sum</button>
@@ -32,13 +32,17 @@
         const URL = "http://localhost:3000";
 
         async function fetchTotal(){
-            const response = await fetch(SERVER_URL + "/total");
+            const response = await fetch(URL + "/total");
             const data = await response.json();
-            document.getElementById("totalDisplay").innerText =
+            document.getElementById("total").innerText =
             "Current Total: " + data.total;
+            console.log(data.total)
         }
 
         async function sendNumber(){ // recall that async means it won't disrupt program flow
+            const number = Number(document.getElementById("numberInput").value)
+            if (isNaN(number)) return;
+
             const response = await fetch(URL + "/add", {
                 method: "POST", 
                 // fetch has four distinct methods:
@@ -49,7 +53,7 @@
             });
         }
 
-
+        setInterval(fetchTotal, 10)
     </script>
 </body>
 </html>
