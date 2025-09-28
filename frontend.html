@@ -28,7 +28,6 @@
     <input type = "number" id = "numberInput" placeholder = "enter a number..." step = "1"/>
     <button onclick = "sendNumber()">Add Number</button>
     <button onclick = "fetchTotal()">Update Sum</button>
-    <button onclick = "resetNumber()">Reset</button>
     <script>
         const URL = "https://server-sou2.onrender.com";
 
@@ -52,18 +51,6 @@
                 // as we formatted it in 
                 body: JSON.stringify({ number: number }), 
             });
-        }
-
-        async function sendNumber(){ 
-            const response = await fetch(URL + "/reset", {
-                method: "POST", 
-                // fetch has four distinct methods:
-                // GET (fetch data), POST (send data), PUT (replace), and DELETE (delete... I'd assume?)
-                headers: { "Content-Type": "application/json" }, 
-                // as we formatted it in 
-                body: JSON.stringify({ number: number }), 
-            });
-            document.getElementById("total").innerText = "Current Total: " + data.total;
         }
 
         setInterval(fetchTotal, 10)
