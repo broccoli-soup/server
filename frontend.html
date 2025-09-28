@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+        }
+        button{
+            padding: 10px 15px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #numberInput{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shared Total</h1>
+    <p id = "Total">Loading...</p>
+    <input type = "number" id = "numberInput" placeholder = "enter a number..." step = "1"/>
+    <button onclick = "sendNumber()">Add Number</button>
+    <button onclick = "fetchTotal()">Update Sum</button>
+    <script>
+        const URL = "http://localhost:3000";
+
+        async function fetchTotal(){
+            const response = await fetch(SERVER_URL + "/total");
+            const data = await response.json();
+            document.getElementById("totalDisplay").innerText =
+            "Current Total: " + data.total;
+        }
+
+        async function sendNumber(){ // recall that async means it won't disrupt program flow
+            const response = await fetch(URL + "/add", {
+                method: "POST", 
+                // fetch has four distinct methods:
+                // GET (fetch data), POST (send data), PUT (replace), and DELETE (delete... I'd assume?)
+                headers: { "Content-Type": "application/json" }, 
+                // as we formatted it in 
+                body: JSON.stringify({ number: number }), 
+            });
+        }
+
+
+    </script>
+</body>
+</html>
