@@ -25,6 +25,11 @@ app.get("/total", (req, res) => {
     res.json({total:currentTotal})
 })
 
+app.get("/reset", (req, res) =>{
+    currentTotal = 0;
+    res.json({total:currentTotal})
+})
+
 // req and res -- request and response
 
 // npm is Node Package manager
