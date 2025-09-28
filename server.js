@@ -31,3 +31,5 @@ app.get("/total", (req, res) => {
 // npm init -y initialises the server
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+// test 
